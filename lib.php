@@ -242,12 +242,12 @@ class repository_materials extends repository {
     }
 
     /**
-     * User cannot use the external link to dropbox
+     * Only File references, files can't be uploaded to moodledata
      *
      * @return int
      */
     public function supported_returntypes() {
-        return FILE_INTERNAL | FILE_REFERENCE;
+        return FILE_REFERENCE;
     }
 
     /**
@@ -328,6 +328,9 @@ class repository_materials extends repository {
         } else {
             $file = $this->root_path.$reference;
         }
+        $url = '/'.$this->options['fs_path'].'/'.$reference; print_object($url);
+        @header('Location: '. $url);
+        die;
         if (is_readable($file)) {
             $filename = $storedfile->get_filename();
             if ($options && isset($options['filename'])) {
