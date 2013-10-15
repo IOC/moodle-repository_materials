@@ -102,11 +102,13 @@ class repository_materials extends repository {
         if ($dh = opendir($this->root_path)) {
             while (($file = readdir($dh)) != false) {
                 if ( $file != '.' and $file !='..') {
+
                     if (is_dir($this->root_path.$file)) {
                         $dirslist[] = $file;
+                        $fileslist[] = $file;
                     } else {
                         $fileslist[] = $file;
-                    }
+                     }
                 }
             }
         }
@@ -129,15 +131,27 @@ class repository_materials extends repository {
                 );
         }
         foreach ($fileslist as $file) {
-            $list['list'][] = array(
-                'title' => $file,
-                'source' => $path.'/'.$file,
-                'size' => filesize($this->root_path.$file),
-                'datecreated' => filectime($this->root_path.$file),
-                'datemodified' => filemtime($this->root_path.$file),
-                'thumbnail' => $OUTPUT->pix_url(file_extension_icon($file, 90))->out(false),
-                'icon' => $OUTPUT->pix_url(file_extension_icon($file, 24))->out(false)
-            );
+            if (is_dir($this->root_path.$file)) {
+                $list['list'][] = array(
+                    'title' => 'Carpeta'.$file,
+                    'source' => $path.'/'.$file,
+                    'size' => filesize($this->root_path.$file),
+                    'datecreated' => filectime($this->root_path.$file),
+                    'datemodified' => filemtime($this->root_path.$file),
+                    'thumbnail' => $OUTPUT->pix_url('f/foldericon-64')->out(false),
+                    'icon' => $OUTPUT->pix_url(file_extension_icon($file, 24))->out(false)
+                );
+            } else {
+                $list['list'][] = array(
+                    'title' => $file,
+                    'source' => $path.'/'.$file,
+                    'size' => filesize($this->root_path.$file),
+                    'datecreated' => filectime($this->root_path.$file),
+                    'datemodified' => filemtime($this->root_path.$file),
+                    'thumbnail' => $OUTPUT->pix_url(file_extension_icon($file, 90))->out(false),
+                    'icon' => $OUTPUT->pix_url(file_extension_icon($file, 24))->out(false)
+                );
+            }
         }
         $list['list'] = array_filter($list['list'], array($this, 'filter'));
         return $list;
