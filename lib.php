@@ -15,27 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This plugin is used to access files on server file system
+ * Repository_materials class, based in repository_filesystem class.
  *
- * @since 2.0
+ *
  * @package    repository_materials
- * @copyright  2010 Dongsheng Cai {@link http://dongsheng.org}
+ * @copyright  2013 IOC
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 require_once($CFG->dirroot . '/repository/lib.php');
 require_once($CFG->libdir . '/filelib.php');
 
-/**
- * repository_materials class
- *
- * Create a repository from your local filesystem
- * *NOTE* for security issue, we use a fixed repository path
- * which is %moodledata%/repository
- *
- * @package    repository
- * @copyright  2009 Dongsheng Cai {@link http://dongsheng.org}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+
 class repository_materials extends repository {
 
     /**
@@ -49,7 +40,7 @@ class repository_materials extends repository {
         global $CFG;
         parent::__construct($repositoryid, $context, $options);
         $root = $CFG->dataroot . '/repository/';
-        $subdir = $this->get_option('fs_path');
+        $subdir = $this->get_option('mt_path');
 
         $this->root_path = $root;
         if (!empty($subdir)) {
@@ -70,7 +61,8 @@ class repository_materials extends repository {
         }
     }
     public function get_listing($path = '', $page = '') {
-        global $CFG, $OUTPUT;
+        global $CFG, $OUTPUT, $PAGE;
+
         $list = array();
         $list['list'] = array();
         // process breacrumb trail
@@ -105,7 +97,9 @@ class repository_materials extends repository {
 
                     if (is_dir($this->root_path.$file)) {
                         $dirslist[] = $file;
-                        $fileslist[] = $file;
+                        if (!isset($PAGE->course)) {
+                            $fileslist[] = $file;
+                        }
                     } else {
                         $fileslist[] = $file;
                      }
@@ -133,13 +127,13 @@ class repository_materials extends repository {
         foreach ($fileslist as $file) {
             if (is_dir($this->root_path.$file)) {
                 $list['list'][] = array(
-                    'title' => 'Carpeta'.$file,
+                    'title' => $file,
                     'source' => $path.'/'.$file,
                     'size' => filesize($this->root_path.$file),
                     'datecreated' => filectime($this->root_path.$file),
                     'datemodified' => filemtime($this->root_path.$file),
-                    'thumbnail' => $OUTPUT->pix_url('f/foldericon-64')->out(false),
-                    'icon' => $OUTPUT->pix_url(file_extension_icon($file, 24))->out(false)
+                    'thumbnail' => $OUTPUT->pix_url('f/foldericon-80', 'repository_materials')->out(false),
+                    'icon' => $OUTPUT->pix_url('f/foldericon-24', 'repository_materials')->out(false)
                 );
             } else {
                 $list['list'][] = array(
@@ -198,11 +192,11 @@ class repository_materials extends repository {
     }
 
     public static function get_instance_option_names() {
-        return array('fs_path');
+        return array('mt_path');
     }
 
     public function set_option($options = array()) {
-        $options['fs_path'] = clean_param($options['fs_path'], PARAM_PATH);
+        $options['mt_path'] = clean_param($options['mt_path'], PARAM_PATH);
         $ret = parent::set_option($options);
         return $ret;
     }
@@ -225,10 +219,10 @@ class repository_materials extends repository {
                 }
                 if (empty($choices)) {
                     $mform->addElement('static', '', '', get_string('nosubdir', 'repository_materials', $path));
-                    $mform->addElement('hidden', 'fs_path', '');
-                    $mform->setType('fs_path', PARAM_PATH);
+                    $mform->addElement('hidden', 'mt_path', '');
+                    $mform->setType('mt_path', PARAM_PATH);
                 } else {
-                    $mform->addElement('select', 'fs_path', $fieldname, $choices);
+                    $mform->addElement('select', 'mt_path', $fieldname, $choices);
                     $mform->addElement('static', null, '',  get_string('information','repository_materials', $path));
                 }
                 closedir($handle);
@@ -249,8 +243,8 @@ class repository_materials extends repository {
         }
     }
     public static function instance_form_validation($mform, $data, $errors) {
-        if (empty($data['fs_path'])) {
-            $errors['fs_path'] = get_string('invalidadminsettingname', 'error', 'fs_path');
+        if (empty($data['mt_path'])) {
+            $errors['mt_path'] = get_string('invalidadminsettingname', 'error', 'mt_path');
         }
         return $errors;
     }
@@ -342,7 +336,7 @@ class repository_materials extends repository {
         } else {
             $file = $this->root_path.$reference;
         }
-        $url = '/'.$this->options['fs_path'].'/'.$reference; print_object($url);
+        $url = '/'.$this->options['mt_path'].'/'.$reference;
         @header('Location: '. $url);
         die;
         if (is_readable($file)) {
