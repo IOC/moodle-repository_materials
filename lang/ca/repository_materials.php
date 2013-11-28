@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'repository_materials', language 'en'
+ * Strings for component 'repository_materials', language 'ca'
  *
  * @package   repository
  * @subpackage materials
@@ -24,17 +24,17 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['blockedpath'] = 'Blocked root path';
-$string['configplugin'] = 'Configuration for file system repository';
+$string['blockedpath'] = 'Ruta arrel bloquejada';
+$string['configplugin'] = 'Configura el repositori';<
 $string['donotusesysdir'] = 'Don\'t use system directory as repository, including';
-$string['filesystem:view'] = 'View file system repository';
-$string['information'] = 'These folders are within the <b>{$a}</b> directory.';
-$string['invalidpath'] = 'Invalid root path';
+$string['filesystem:view'] = 'Mostra el repositori del sistema de fitxers';
+$string['information'] = 'Aquestes carpetes estan dins del directori <b>{$a}</b>.';
+$string['invalidpath'] = 'Camí de l\'arrel no vàlid';
 $string['materials:view'] = 'View materials repository';
-$string['path'] = 'Select a subdirectory';
-$string['root'] = 'Root';
-$string['nosubdir'] = 'You need to create at least one folder inside the <b>{$a}</b> directory so you can select it here.';
-$string['pluginname_help'] = 'Create repository from local directory';
+$string['path'] = 'Selecciona una subcarpeta';
+$string['root'] = 'Arrel';
+$string['nosubdir'] = 'Heu de crear almenys una carpeta dins del directori <b>{$a}</b> de manera que pugueu seleccionar-la aquí.';
+$string['pluginname_help'] = 'Crea un repositori des d\'un directori local';
 $string['pluginname'] = 'Materials';
-$string['enablecourseinstances'] = 'Allow admins to add a file system repository instance to a course (configurable only by admins)';
-$string['enableuserinstances'] = 'Allow admins to add a file system repository instance for personal use (configurable only by admins)';
+$string['enablecourseinstances'] = 'Permet als usuaris afegir una instància de repositori al curs (sols pot ser configurat pels administradors).';
+$string['enableuserinstances'] = 'Permet als usuaris afegir una instància de repositori en el context d\'usuari (sols pot ser configurat pels administradors).';
