@@ -25,7 +25,7 @@
  */
 
 $string['blockedpath'] = 'Ruta arrel bloquejada';
-$string['configplugin'] = 'Configura el repositori';<
+$string['configplugin'] = 'Configura el repositori';
 $string['donotusesysdir'] = 'Don\'t use system directory as repository, including';
 $string['filesystem:view'] = 'Mostra el repositori del sistema de fitxers';
 $string['information'] = 'Aquestes carpetes estan dins del directori <b>{$a}</b>.';
