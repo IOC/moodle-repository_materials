@@ -120,7 +120,7 @@ class repository_materials extends repository {
                 'children' => array(),
                 'datecreated' => filectime($this->root_path.$file),
                 'datemodified' => filemtime($this->root_path.$file),
-                'thumbnail' => $OUTPUT->pix_url(file_folder_icon(90))->out(false),
+                'thumbnail' => $OUTPUT->image_url(file_folder_icon(90))->out(false),
                 'path' => $current_path
                 );
         }
@@ -132,8 +132,8 @@ class repository_materials extends repository {
                     'size' => filesize($this->root_path.$file),
                     'datecreated' => filectime($this->root_path.$file),
                     'datemodified' => filemtime($this->root_path.$file),
-                    'thumbnail' => $OUTPUT->pix_url('f/foldericon-80', 'repository_materials')->out(false),
-                    'icon' => $OUTPUT->pix_url('f/foldericon-24', 'repository_materials')->out(false)
+                    'thumbnail' => $OUTPUT->image_url('f/foldericon-80', 'repository_materials')->out(false),
+                    'icon' => $OUTPUT->image_url('f/foldericon-24', 'repository_materials')->out(false)
                 );
             } else {
                 $list['list'][] = array(
@@ -142,8 +142,8 @@ class repository_materials extends repository {
                     'size' => filesize($this->root_path.$file),
                     'datecreated' => filectime($this->root_path.$file),
                     'datemodified' => filemtime($this->root_path.$file),
-                    'thumbnail' => $OUTPUT->pix_url(file_extension_icon($file, 90))->out(false),
-                    'icon' => $OUTPUT->pix_url(file_extension_icon($file, 24))->out(false)
+                    'thumbnail' => $OUTPUT->image_url(file_extension_icon($file, 90))->out(false),
+                    'icon' => $OUTPUT->image_url(file_extension_icon($file, 24))->out(false)
                 );
             }
         }
