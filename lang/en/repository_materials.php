@@ -38,3 +38,4 @@ $string['pluginname_help'] = 'Create repository from local directory';
 $string['pluginname'] = 'Materials';
 $string['enablecourseinstances'] = 'Allow admins to add a file system repository instance to a course (configurable only by admins)';
 $string['enableuserinstances'] = 'Allow admins to add a file system repository instance for personal use (configurable only by admins)';
+$string['privacy:metadata'] = 'Materials plugin does not store any personal data.';

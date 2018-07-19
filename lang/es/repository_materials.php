@@ -38,3 +38,4 @@ $string['nosubdir'] = 'Necesita crear al menos una carpeta dentro del directorio
 $string['path'] = 'Seleccionar un subdirectorio';
 $string['pluginname'] = 'Materiales';
 $string['pluginname_help'] = 'Crear un repositorio desde el directorio local';
+$string['privacy:metadata'] = 'Materiales no almacena información personal.';

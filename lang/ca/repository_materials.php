@@ -38,3 +38,4 @@ $string['pluginname_help'] = 'Crea un repositori des d\'un directori local';
 $string['pluginname'] = 'Materials';
 $string['enablecourseinstances'] = 'Permet als usuaris afegir una instància de repositori al curs (sols pot ser configurat pels administradors).';
 $string['enableuserinstances'] = 'Permet als usuaris afegir una instància de repositori en el context d\'usuari (sols pot ser configurat pels administradors).';
+$string['privacy:metadata'] = 'Materials no enregistra cap dada personal.';
